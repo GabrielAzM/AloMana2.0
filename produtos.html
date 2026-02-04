@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alô!Mana?</title>
+    <link rel="shortcut icon" href="img/logo-favicon-alomana.png" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="variables.css">
+</head>
+
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <div class="search-wrapper">
+                <div class="search-container">
+                    <input type="text" placeholder="Busque por batom, blush, base…">
+                    <svg viewBox="0 0 18 18" xmlns="http://www.w3.org/2000/svg" class="icon-search">
+                        <path
+                            d="M16.6 18L10.3 11.7C9.8 12.1 9.225 12.4167 8.575 12.65C7.925 12.8833 7.23333 13 6.5 13C4.68333 13 3.14583 12.3708 1.8875 11.1125C0.629167 9.85417 0 8.31667 0 6.5C0 4.68333 0.629167 3.14583 1.8875 1.8875C3.14583 0.629167 4.68333 0 6.5 0C8.31667 0 9.85417 0.629167 11.1125 1.8875C12.3708 3.14583 13 4.68333 13 6.5C13 7.23333 12.8833 7.925 12.65 8.575C12.4167 9.225 12.1 9.8 11.7 10.3L18 16.6L16.6 18ZM6.5 11C7.75 11 8.8125 10.5625 9.6875 9.6875C10.5625 8.8125 11 7.75 11 6.5C11 5.25 10.5625 4.1875 9.6875 3.3125C8.8125 2.4375 7.75 2 6.5 2C5.25 2 4.1875 2.4375 3.3125 3.3125C2.4375 4.1875 2 5.25 2 6.5C2 7.75 2.4375 8.8125 3.3125 9.6875C4.1875 10.5625 5.25 11 6.5 11Z"
+                            fill="currentColor" />
+                    </svg>
+                </div>
+            </div>
+
+
+            <a href="index.html"><img class="logo-alomana" src="img/logo-alomana.png" alt="Alô!Mana? Logo"></a>
+
+            <div class="header-actions">
+                <div class="dark-mode-wrapper">
+                    <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider"></span>
+                    </label>
+                    <span class="dark-mode-text">Dark-Mode</span>
+                </div>
+                <svg viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg" class="icon-cart">
+                    <path
+                        d="M16 53.33c-1.47 0-2.72-.52-3.77-1.57-1.04-1.04-1.56-2.3-1.56-3.76s.52-2.72 1.56-3.77c1.05-1.04 2.3-1.57 3.77-1.57s2.72.53 3.77 1.57c1.04 1.05 1.56 2.3 1.56 3.77s-.52 2.72-1.56 3.77c-1.05 1.05-2.3 1.57-3.77 1.57zm26.67 0c-1.47 0-2.72-.52-3.77-1.57-1.04-1.04-1.56-2.3-1.56-3.76s.52-2.72 1.56-3.77c1.05-1.04 2.3-1.57 3.77-1.57s2.72.53 3.77 1.57c1.04 1.05 1.56 2.3 1.56 3.77s-.52 2.72-1.56 3.77c-1.05 1.05-2.3 1.57-3.77 1.57zM13.73 10.67l6.4 13.33H38.8l7.33-13.33H13.73zM11.2 5.33h39.33c1.03 0 1.8.46 2.34 1.37.53.9.55 1.83.06 2.76l-9.46 17.07c-.49.89-1.15 1.58-1.97 2.07-.82.49-1.72.73-2.7.73H18.93l-2.93 5.34H48V40H16c-2 0-3.51-.88-4.53-2.63-1.02-1.76-1.07-3.5-.13-5.24l3.6-6.53L5.33 5.33H0V0h8.67l2.53 5.33z"
+                        fill="currentColor" />
+                </svg>
+            </div>
+        </div>
+    </header>
+    <nav class="main-nav">
+        <ul class="nav-list">
+            <li><a href="produtos.html" class="nav-link">TODOS OS PRODUTOS</a></li>
+            <li><a href="kits.html" class="nav-link">KITS</a></li>
+            <li><a href="skincare.html" class="nav-link">SKINCARE</a></li>
+            <li><a href="maquiagem.html" class="nav-link">MAQUIAGEM</a></li>
+            <li><a href="institucional.html" class="nav-link">INSTITUCIONAL</a></li>
+        </ul>
+    </nav>
+
+    <main class="produtos-page-container">
+        <aside class="sidebar-filtros">
+            <div class="title-container">
+                <h1 class="h1-title">Produtos</h1>
+                <h2 class="h2-subtitle">Nossos</h2>
+            </div>
+
+            <nav class="filtros-container">
+                <details class="filtro-grupo" open>
+                    <summary class="filtro-header">Categorias</summary>
+                    <ul class="filtro-lista">
+                        <li class="filtro-item-opcao"><label><input type="checkbox"> Acessórios</label></li>
+                        <li class="filtro-item-opcao"><label><input type="checkbox"> Face</label></li>
+                        <li class="filtro-item-opcao"><label><input type="checkbox"> Lábios</label></li>
+                        <li class="filtro-item-opcao"><label><input type="checkbox"> Olhos</label></li>
+                        <li class="filtro-item-opcao"><label><input type="checkbox"> Skincare</label></li>
+                    </ul>
+                </details>
+
+                <details class="filtro-grupo">
+                    <summary class="filtro-header">Preço</summary>
+                    <ul class="filtro-lista">
+                        <li class="filtro-item-opcao">
+                            <label><input type="checkbox"> Até R$ 50</label>
+                        </li>
+                    </ul>
+                </details>
+            </nav>
+        </aside>
+
+        <section class="produtos-vitrine">
+            <div class="vitrine-header">
+                <span class="contagem">XX produtos</span>
+                <div class="ordenacao-dropdown">
+                    <select class="select-customizado">
+                        <option value="mais-vendidos">Mais Vendidos</option>
+                        <option value="menor-preco">Menor Preço</option>
+                        <option value="maior-preco">Maior Preço</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="produtos-grid">
+                <article class="product-card">
+                    <img src="img/img-produtos-corretivos-alomana.jpg" alt="Corretivo Colorido" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Corretivo Colorido | 4 Seasons</h3>
+                        <p class="product-description">Alta cobertura para neutralizar marcas e imperfeições da pele.
+                        </p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 59,90</span>
+                                <span class="price-installments">ou em 2x de R$ 29,95</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-base-alomana.jpg" alt="Base Liquida Fluid" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Base Liquida Fluid | Second Skin</h3>
+                        <p class="product-description">Age como uma segunda pele. Proteção total que devolve a sua
+                            integridade.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 98,90</span>
+                                <span class="price-installments">ou em 2x de R$ 49,45</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-paletaDeSombra-alomana.jpg" alt="Paleta de Sombras"
+                        class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Paleta de Sombras | Behind The Scenes</h3>
+                        <p class="product-description">Crie profundidade e camadas. Tons intensos que revelam suas
+                            nuances.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 119,90</span>
+                                <span class="price-installments">ou em 2x de R$ 59,95</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-rimel-alomana.jpg" alt="Máscara de Cílios" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Máscara de Cílios | Speak Volume</h3>
+                        <p class="product-description">Definição à prova de emoções fortes. Dê volume ao seu olhar.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 64,90</span>
+                                <span class="price-installments">ou em 2x de R$ 32,45</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-alomana.jpg" alt="Produto" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Produto</h3>
+                        <p class="product-description">Descrição do produto .....................</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">Valor</span>
+                                <span class="price-installments">ou em 2x valor</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <img src="img/ifb-logo.png" alt="Logo IFB">
+            </div>
+
+            <div class="footer-info">
+                <p class="copyright">© 2026 – Alô!Mana?<br>Projeto acadêmico</p>
+                <p class="instituicao">Instituto Federal de Brasília – IFB</p>
+            </div>
+
+            <div class="footer-spacer"></div>
+        </div>
+    </footer>
+</body>
+</html>

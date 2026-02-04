@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alô!Mana?</title>
-    <link rel="shortcut icon" href="img\logo-favicon-alomana.png" type="image/x-icon">
+    <link rel="shortcut icon" href="img/logo-favicon-alomana.png" type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="variables.css">
 </head>
+
 <body>
-    <header>
+    <header class="main-header">
         <div class="header-container">
             <div class="search-wrapper">
                 <div class="search-container">
@@ -22,8 +24,7 @@
                 </div>
             </div>
 
-
-            <img class="logo-alomana" src="img/logo-alomana.png" alt="Alô!Mana? Logo">
+            <a href="index.html"><img class="logo-alomana" src="img/logo-alomana.png" alt="Alô!Mana? Logo"></a>
 
             <div class="header-actions">
                 <div class="dark-mode-wrapper">
@@ -41,7 +42,7 @@
             </div>
         </div>
     </header>
-    <nav class="nav-container">
+    <nav class="main-nav">
         <ul class="nav-list">
             <li><a href="produtos.html" class="nav-link">TODOS OS PRODUTOS</a></li>
             <li><a href="kits.html" class="nav-link">KITS</a></li>
@@ -55,9 +56,8 @@
     </section>
     <section class="categorias-container">
         <div class="title-container">
-            <h2>Nossas</h2>
-            <h1>Categorias</h1>
-            <hr>
+            <h1 class="h1-title">Categorias</h1>
+            <h2 class="h2-subtitle">Nossas</h2>
         </div>
         <div class="categories-grid">
             <div class="category-card card-labios">
@@ -83,20 +83,178 @@
     </section>
     <section class="favorite-container">
         <div class="title-container">
-            <h2>Favoritos dos</h2>
-            <h1>Clientes</h1>
-            <hr>
+            <h1 class="h1-title">Clientes</h1>
+            <h2 class="h2-subtitle">Favoritos dos</h2>
+        </div>
+
+        <div class="carousel-wrapper">
+            <button class="nav-arrow left-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="products-grid">
+                <article class="product-card">
+                    <img src="img/img-produtos-corretivos-alomana.jpg" alt="Corretivo Colorido" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Corretivo Colorido | 4 Seasons</h3>
+                        <p class="product-description">Alta cobertura para neutralizar marcas e imperfeições da pele.
+                        </p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 59,90</span>
+                                <span class="price-installments">ou em 2x de R$ 29,95</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-base-alomana.jpg" alt="Base Liquida Fluid" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Base Liquida Fluid | Second Skin</h3>
+                        <p class="product-description">Age como uma segunda pele. Proteção total que devolve a sua
+                            integridade.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 98,90</span>
+                                <span class="price-installments">ou em 2x de R$ 49,45</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-paletaDeSombra-alomana.jpg" alt="Paleta de Sombras"
+                        class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Paleta de Sombras | Behind The Scenes</h3>
+                        <p class="product-description">Crie profundidade e camadas. Tons intensos que revelam suas
+                            nuances.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 119,90</span>
+                                <span class="price-installments">ou em 2x de R$ 59,95</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="product-card">
+                    <img src="img/img-produtos-rimel-alomana.jpg" alt="Máscara de Cílios" class="product-image">
+                    <div class="product-info">
+                        <h3 class="product-title">Máscara de Cílios | Speak Volume</h3>
+                        <p class="product-description">Definição à prova de emoções fortes. Dê volume ao seu olhar.</p>
+                        <div class="product-footer">
+                            <div class="price-box">
+                                <span class="price-value">R$ 64,90</span>
+                                <span class="price-installments">ou em 2x de R$ 32,45</span>
+                            </div>
+                            <button class="buy-button">Comprar</button>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <button class="nav-arrow right-arrow">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
         </div>
     </section>
+    <section class="depoimentos-container">
+        <div class="title-container">
+            <h1 class="h1-title">Depoimentos</h1>
+        </div>
 
-    <script>
-        var searchBarContainer = document.getElementById("searchBarContainer");
-        if (searchBarContainer) {
-            searchBarContainer.addEventListener("click", function (e) {
-                //Adicionar o código da barra de pesquisa
-            });
-        }
-    </script>
+        <div class="carrossel-container">
+            <button class="nav-arrow left-arrow" aria-label="Anterior">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M15 18l-6-6 6-6" />
+                </svg>
+            </button>
+
+            <div class="depoimentos-wrapper">
+                <div class="depoimentos-grid">
+                    <article class="testemunho-card">
+                        <div class="quote-area">
+                            <span class="aspas">“</span>
+                            <p class="texto-depoimento">Lorem ipsum dolor sit amet consectetur. Elit sociis consequat
+                                venenatis justo sed aenean amet lacus.Lorem ipsum dolor sit amet consectetur. Elit
+                                sociis consequat venenatis justo.</p>
+                        </div>
+                        <div class="cliente-info">
+                            <img src="img/img-clientes1-alomana.jpg" alt="Foto da Cliente" class="foto-perfil">
+                            <h3 class="nome-cliente">SUZANA</h3>
+                        </div>
+                    </article>
+
+                    <article class="testemunho-card">
+                        <div class="quote-area">
+                            <span class="aspas">“</span>
+                            <p class="texto-depoimento">Lorem ipsum dolor sit amet consectetur. Elit sociis consequat
+                                venenatis justo sed aenean amet lacus.Lorem ipsum dolor sit amet consectetur. Elit
+                                sociis consequat venenatis justo.</p>
+                        </div>
+                        <div class="cliente-info">
+                            <img src="img/img-clientes2-alomana.jpg" alt="Foto da Cliente" class="foto-perfil">
+                            <h3 class="nome-cliente">ANA</h3>
+                        </div>
+                    </article>
+
+                    <article class="testemunho-card">
+                        <div class="quote-area">
+                            <span class="aspas">“</span>
+                            <p class="texto-depoimento">Lorem ipsum dolor sit amet consectetur. Elit sociis consequat
+                                venenatis justo sed aenean amet lacus.Lorem ipsum dolor sit amet consectetur. Elit
+                                sociis consequat venenatis justo.</p>
+                        </div>
+                        <div class="cliente-info">
+                            <img src="img/img-clientes3-alomana.jpg" alt="Foto da Cliente" class="foto-perfil">
+                            <h3 class="nome-cliente">EDUARDA</h3>
+                        </div>
+                    </article>
+
+                    <article class="testemunho-card">
+                        <div class="quote-area">
+                            <span class="aspas">“</span>
+                            <p class="texto-depoimento">Lorem ipsum dolor sit amet consectetur. Elit sociis consequat
+                                venenatis justo sed aenean amet lacus.Lorem ipsum dolor sit amet consectetur. Elit
+                                sociis consequat venenatis justo.</p>
+                        </div>
+                        <div class="cliente-info">
+                            <img src="img/img-clientes4-alomana.jpg" alt="Foto da Cliente" class="foto-perfil">
+                            <h3 class="nome-cliente">EMILY</h3>
+                        </div>
+                    </article>
+                </div>
+            </div>
+
+            <button class="nav-arrow right-arrow" aria-label="Próximo">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 18l6-6-6-6" />
+                </svg>
+            </button>
+        </div>
+    </section>
+    <footer class="main-footer">
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <img src="img/ifb-logo.png" alt="Logo IFB">
+            </div>
+
+            <div class="footer-info">
+                <p class="copyright">© 2026 – Alô!Mana?<br>Projeto acadêmico</p>
+                <p class="instituicao">Instituto Federal de Brasília – IFB</p>
+            </div>
+
+            <div class="footer-spacer"></div>
+        </div>
+    </footer>
 </body>
-
 </html>
