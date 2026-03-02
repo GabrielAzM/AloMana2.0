@@ -1,0 +1,119 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Produtos{% endblock %}
+
+{% block content %}
+<section class="produtos-page-container">
+    <aside class="sidebar-filtros">
+        <div class="title-container">
+            <h1 class="h1-title">Produtos</h1>
+            <h2 class="h2-subtitle">Nossos</h2>
+        </div>
+
+        <form class="filtros-container filtros-form" action="{{ url_for('store.products_page') }}" method="get">
+            <input type="hidden" name="q" value="{{ search_term }}">
+
+            <details class="filtro-grupo" open>
+                <summary class="filtro-header">Categorias</summary>
+                <ul class="filtro-lista">
+                    <li class="filtro-item-opcao">
+                        <label>
+                            <input type="radio" name="categoria" value="todos" {% if selected_category == 'todos' %}checked{% endif %}>
+                            Todos
+                        </label>
+                    </li>
+                    <li class="filtro-item-opcao">
+                        <label>
+                            <input type="radio" name="categoria" value="kits" {% if selected_category == 'kits' %}checked{% endif %}>
+                            Kits
+                        </label>
+                    </li>
+                    <li class="filtro-item-opcao">
+                        <label>
+                            <input type="radio" name="categoria" value="skincare" {% if selected_category == 'skincare' %}checked{% endif %}>
+                            Skincare
+                        </label>
+                    </li>
+                    <li class="filtro-item-opcao">
+                        <label>
+                            <input type="radio" name="categoria" value="maquiagem" {% if selected_category == 'maquiagem' %}checked{% endif %}>
+                            Maquiagem
+                        </label>
+                    </li>
+                </ul>
+            </details>
+
+            <details class="filtro-grupo">
+                <summary class="filtro-header">Preco</summary>
+                <ul class="filtro-lista">
+                    <li class="filtro-item-opcao">Ordene por menor ou maior preco.</li>
+                </ul>
+            </details>
+
+            <button class="buy-button filtro-submit" type="submit">Aplicar filtros</button>
+        </form>
+    </aside>
+
+    <section class="produtos-vitrine">
+        {% if category_copy %}
+            <article class="category-hero">
+                <div class="category-hero-image"></div>
+                <div class="category-hero-copy">
+                    <h2>{{ category_copy.title }}</h2>
+                    <h3>{{ category_copy.subtitle }}</h3>
+                    <p>{{ category_copy.text }}</p>
+                </div>
+            </article>
+        {% endif %}
+
+        <div class="vitrine-header">
+            <span class="contagem">{{ products | length }} produtos</span>
+            <form class="ordenacao-dropdown" action="{{ request.path if selected_category != 'todos' else url_for('store.products_page') }}" method="get">
+                {% if search_term %}
+                    <input type="hidden" name="q" value="{{ search_term }}">
+                {% endif %}
+                {% if selected_category != 'todos' %}
+                    <input type="hidden" name="categoria" value="{{ selected_category }}">
+                {% endif %}
+                <select class="select-customizado" name="ordem" onchange="this.form.submit()">
+                    <option value="mais-vendidos" {% if selected_order == 'mais-vendidos' %}selected{% endif %}>Mais vendidos</option>
+                    <option value="menor-preco" {% if selected_order == 'menor-preco' %}selected{% endif %}>Menor preco</option>
+                    <option value="maior-preco" {% if selected_order == 'maior-preco' %}selected{% endif %}>Maior preco</option>
+                </select>
+            </form>
+        </div>
+
+        {% if products %}
+            <div class="produtos-grid">
+                {% for product in products %}
+                    <article class="product-card">
+                        <a href="{{ url_for('store.product_detail_page', slug=product.slug) }}">
+                            <img src="{{ url_for('static', filename='img/' ~ product.image_filename) }}" alt="{{ product.name }}" class="product-image">
+                        </a>
+                        <div class="product-info">
+                            <h3 class="product-title">
+                                <a href="{{ url_for('store.product_detail_page', slug=product.slug) }}" class="product-link">{{ product.name }}</a>
+                            </h3>
+                            <p class="product-description">{{ product.description_short }}</p>
+                            <div class="product-footer">
+                                <div class="price-box">
+                                    <span class="price-value">{{ product.price_cents | brl }}</span>
+                                    <span class="price-installments">ou em 2x de {{ (product.price_cents // 2) | brl }}</span>
+                                </div>
+                                <form action="{{ url_for('store.add_cart_item') }}" method="post">
+                                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="next" value="{{ request.full_path }}">
+                                    <button class="buy-button" type="submit">Comprar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p class="empty-state">Nenhum produto encontrado para os filtros aplicados.</p>
+        {% endif %}
+    </section>
+</section>
+{% endblock %}

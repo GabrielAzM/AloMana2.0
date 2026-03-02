@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Admin Mapeamentos{% endblock %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="admin-header">
+        <div>
+            <h1>Mapeamento produto -> ocorrencia</h1>
+            <p>Usuario ativo: {{ admin_user.username }}</p>
+        </div>
+        <div class="admin-header-actions">
+            <a class="buy-button secondary-btn" href="{{ url_for('admin.occurrences_page') }}">Ocorrencias</a>
+            <form action="{{ url_for('admin.logout') }}" method="post">
+                <button class="buy-button" type="submit">Sair</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="admin-table-wrapper">
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>Produto</th>
+                    <th>Categoria da ocorrencia</th>
+                    <th>Nivel de urgencia</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                    <tr>
+                        <td>
+                            <strong>{{ product.name }}</strong><br>
+                            <small>{{ product.category_label }}</small>
+                        </td>
+                        <td colspan="3">
+                            <form class="mapping-form" action="{{ url_for('admin.mappings_page') }}" method="post">
+                                <input type="hidden" name="product_id" value="{{ product.id }}">
+                                <input type="text" name="occurrence_category" value="{{ product.mapping.occurrence_category if product.mapping else '' }}" required>
+                                <select name="urgency_level">
+                                    {% set current_urgency = product.mapping.urgency_level if product.mapping else 'Baixa' %}
+                                    {% for urgency in urgency_levels %}
+                                        <option value="{{ urgency }}" {% if urgency == current_urgency %}selected{% endif %}>{{ urgency }}</option>
+                                    {% endfor %}
+                                </select>
+                                <button class="buy-button" type="submit">Salvar</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

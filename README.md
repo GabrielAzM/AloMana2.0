@@ -1,8 +1,88 @@
-# AloMana2.0
-Este repositório apresenta o desenvolvimento do Sistema Web Disfarçado de Registro de Ocorrências e Apoio à Mulher, denominado comercialmente Alo!Mana?. O sistema tem como objetivo oferecer um canal seguro, discreto e acessível para que mulheres em situação de violência, assédio, importunação ou risco possam registrar denúncias, solicitar socorro e acompanhar ocorrências, minimizando riscos de exposição.
+﻿# Alo!Mana? 2.0
 
-A proposta do sistema baseia-se no uso de uma interface disfarçada, simulando uma loja de maquiagem, onde ações comuns do usuário representam, na prática, funcionalidades críticas como pedido de ajuda, denúncia anônima e envio de informações de emergência. Essa abordagem visa reduzir a subnotificação de casos e aumentar a segurança da usuária em ambientes de vigilância ou controle pelo agressor.
+Prototipo web em Flask com fachada de e-commerce para registro discreto de ocorrencias, checkout com cupom 100% e painel administrativo.
 
-O projeto está sendo desenvolvido utilizando tecnologias web amplamente consolidadas, como HTML, CSS, JavaScript, Bootstrap no front-end, e Java com Spring Boot no back-end, seguindo princípios de segurança, usabilidade e organização arquitetural. O sistema também contempla funcionalidades administrativas para validação, gerenciamento e encaminhamento das denúncias recebidas.
+## Stack
 
-Este repositório reúne a documentação, protótipos, diagramas UML e o código-fonte do projeto, servindo como base para fins acadêmicos, sociais e de pesquisa aplicada em tecnologia voltada à proteção da mulher.
+- Flask + Jinja2
+- Flask-SQLAlchemy
+- SQLite (padrao)
+- Gunicorn (producao/deploy)
+- HTML/CSS/JS no frontend
+
+## Funcionalidades entregues
+
+- Loja:
+  - Home (`/`)
+  - Produtos com busca/filtro (`/produtos`)
+  - Categorias (`/kits`, `/skincare`, `/maquiagem`)
+  - Detalhe de produto (`/produto/<slug>`)
+  - Carrinho (`/carrinho`)
+  - Checkout (`/checkout`) com cupom automatico de 100%
+- Login da usuaria e acompanhamento:
+  - Cadastro (`/cadastro`)
+  - Login (`/login`)
+  - Meus pedidos (`/meus-pedidos`)
+  - Detalhe do pedido (`/meus-pedidos/<id>`)
+- Painel admin:
+  - Login (`/admin/login`)
+  - Ocorrencias (`/admin/ocorrencias`)
+  - Triagem/status/notas
+  - Mapeamento produto -> categoria/urgencia
+
+## Executar localmente
+
+1. Instalar dependencias:
+   - `python -m pip install -r requirements.txt`
+2. Rodar a app:
+   - `python run.py`
+3. Acessar:
+   - Loja: `http://127.0.0.1:5000/`
+   - Admin: `http://127.0.0.1:5000/admin/login`
+
+## Credenciais padrao
+
+- Admin:
+  - usuario: `admin`
+  - senha: `admin123`
+- Usuario demo:
+  - usuario: `usuario_demo`
+  - email: `usuario@alomana.local`
+  - senha: `usuario123`
+
+## Deploy no Render
+
+O projeto ja inclui os arquivos de deploy:
+
+- `render.yaml`
+- `Procfile`
+- `wsgi.py`
+
+### Opcao 1: Blueprint (recomendado)
+
+1. No Render, clique em **New +** -> **Blueprint**.
+2. Conecte este repositorio.
+3. O Render vai ler `render.yaml` e criar o web service.
+
+### Opcao 2: Web Service manual
+
+1. **New +** -> **Web Service**.
+2. Build Command:
+   - `python -m pip install -r requirements.txt`
+3. Start Command:
+   - `gunicorn --bind 0.0.0.0:$PORT wsgi:app`
+4. Variaveis de ambiente recomendadas:
+   - `SECRET_KEY` (obrigatorio em producao)
+   - `ADMIN_DEFAULT_USERNAME`
+   - `ADMIN_DEFAULT_PASSWORD`
+   - `USER_DEFAULT_USERNAME`
+   - `USER_DEFAULT_EMAIL`
+   - `USER_DEFAULT_PASSWORD`
+   - `DATABASE_URL` (opcional; se nao definir, usa SQLite local)
+
+> Observacao: no Render, SQLite em disco local e efemero. Para persistencia real apos reinicios/deploys, use banco gerenciado e ajuste `DATABASE_URL`.
+
+## Observacao de avaliacao
+
+A instituicao foi anonimizada nas telas com a frase:
+- `informacao omitida e anonimizada para avaliacao`

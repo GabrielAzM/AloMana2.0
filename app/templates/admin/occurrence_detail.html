@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Ocorrencia #{{ occurrence.id }}{% endblock %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="admin-header">
+        <div>
+            <h1>Ocorrencia #{{ occurrence.id }}</h1>
+            <p>Registrada em {{ occurrence.created_at | datetime_br }}</p>
+        </div>
+        <div class="admin-header-actions">
+            <a class="buy-button secondary-btn" href="{{ url_for('admin.occurrences_page') }}">Voltar</a>
+            <form action="{{ url_for('admin.logout') }}" method="post">
+                <button class="buy-button" type="submit">Sair</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="occurrence-grid">
+        <article class="admin-card">
+            <h2>Resumo</h2>
+            <p><strong>Status:</strong> {{ occurrence.status }}</p>
+            <p><strong>Categoria:</strong> {{ occurrence.mapped_category }}</p>
+            <p><strong>Urgencia:</strong> {{ occurrence.urgency_level }}</p>
+            <p>
+                <strong>Conta da usuaria:</strong>
+                {% if occurrence.user %}
+                    {{ occurrence.user.username }} ({{ occurrence.user.email }})
+                {% else %}
+                    -
+                {% endif %}
+            </p>
+            <p><strong>Contato:</strong> {{ occurrence.contact_phone or "-" }} | {{ occurrence.contact_email or "-" }}</p>
+            <p><strong>Observacao:</strong> {{ occurrence.observation or "-" }}</p>
+            <p><strong>Subtotal:</strong> {{ occurrence.subtotal_cents | brl }}</p>
+            <p><strong>Desconto:</strong> {{ occurrence.discount_cents | brl }}</p>
+            <p><strong>Total:</strong> {{ occurrence.total_cents | brl }}</p>
+        </article>
+
+        <article class="admin-card">
+            <h2>Atualizar status</h2>
+            <form action="{{ url_for('admin.occurrence_status_update', occurrence_id=occurrence.id) }}" method="post">
+                <label for="status">Novo status</label>
+                <select id="status" name="status">
+                    {% for status in statuses %}
+                        <option value="{{ status }}" {% if occurrence.status == status %}selected{% endif %}>{{ status }}</option>
+                    {% endfor %}
+                </select>
+                <button class="buy-button" type="submit">Salvar status</button>
+            </form>
+        </article>
+    </div>
+
+    <div class="occurrence-grid">
+        <article class="admin-card">
+            <h2>Itens do checkout</h2>
+            {% set checkout_items = occurrence.get_items() %}
+            {% if checkout_items %}
+                <ul class="admin-list">
+                    {% for item in checkout_items %}
+                        <li>
+                            <strong>{{ item.product_name }}</strong> x{{ item.quantity }}
+                            <span>{{ item.line_total_cents | brl }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum item disponivel.</p>
+            {% endif %}
+        </article>
+
+        <article class="admin-card">
+            <h2>Notas internas</h2>
+            <form action="{{ url_for('admin.occurrence_add_note', occurrence_id=occurrence.id) }}" method="post" class="note-form">
+                <textarea name="note_text" rows="4" placeholder="Registrar observacao de triagem..." required></textarea>
+                <button class="buy-button" type="submit">Adicionar nota</button>
+            </form>
+            {% if occurrence.notes %}
+                <ul class="admin-list">
+                    {% for note in occurrence.notes %}
+                        <li>
+                            <p>{{ note.note_text }}</p>
+                            <small>{{ note.created_at | datetime_br }} - {{ note.admin_user.username }}</small>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Sem notas registradas.</p>
+            {% endif %}
+        </article>
+    </div>
+
+    <article class="admin-card">
+        <h2>Historico de status</h2>
+        {% if occurrence.histories %}
+            <ul class="admin-list">
+                {% for event in occurrence.histories %}
+                    <li>
+                        <strong>{{ event.new_status }}</strong>
+                        <span>
+                            {% if event.previous_status %}de {{ event.previous_status }}{% else %}status inicial{% endif %}
+                            em {{ event.changed_at | datetime_br }}
+                            {% if event.changed_by %}por {{ event.changed_by.username }}{% endif %}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Sem historico.</p>
+        {% endif %}
+    </article>
+
+    <article class="admin-card">
+        <h2>Mensagens da usuaria</h2>
+        {% if occurrence.user_messages %}
+            <ul class="admin-list">
+                {% for message in occurrence.user_messages %}
+                    <li>
+                        <p>{{ message.message_text }}</p>
+                        <small>{{ message.created_at | datetime_br }} - {{ message.user.username }} ({{ message.user.email }})</small>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Sem mensagens da usuaria.</p>
+        {% endif %}
+    </article>
+</section>
+{% endblock %}

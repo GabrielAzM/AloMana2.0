@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Admin Login{% endblock %}
+
+{% block content %}
+<section class="admin-login-page">
+    <form class="admin-login-card" action="{{ url_for('admin.login_page', next=request.args.get('next', '')) }}" method="post">
+        <h1>Painel administrativo</h1>
+        <p>Login restrito para recebimento, triagem e encaminhamento de ocorrencias.</p>
+
+        <label for="username">Usuario</label>
+        <input id="username" name="username" type="text" required>
+
+        <label for="password">Senha</label>
+        <input id="password" name="password" type="password" required>
+
+        <button class="buy-button" type="submit">Entrar</button>
+    </form>
+</section>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Checkout{% endblock %}
+
+{% block content %}
+<section class="checkout-page">
+    <div class="title-container">
+        <h1 class="h1-title">Checkout</h1>
+        <h2 class="h2-subtitle">Finalizacao</h2>
+    </div>
+
+    <div class="checkout-layout">
+        <form class="checkout-form" action="{{ url_for('store.checkout_finalize') }}" method="post">
+            <h3>Conta conectada</h3>
+            <p class="checkout-help-text">Pedido vinculado a: <strong>{{ user.username }}</strong> ({{ user.email }})</p>
+
+            <h3>Contato opcional</h3>
+            <p class="checkout-help-text">Preencha somente se quiser retorno da equipe responsavel.</p>
+
+            <label for="contact_phone">Telefone (opcional)</label>
+            <input id="contact_phone" name="contact_phone" type="text" placeholder="(00) 00000-0000">
+
+            <label for="contact_email">Email (opcional)</label>
+            <input id="contact_email" name="contact_email" type="email" placeholder="seuemail@exemplo.com" value="{{ user.email }}">
+
+            <label for="observation">Observacao (opcional)</label>
+            <textarea id="observation" name="observation" rows="5" placeholder="Escreva apenas o essencial para triagem."></textarea>
+
+            <button class="buy-button checkout-submit" type="submit">Finalizar pedido</button>
+        </form>
+
+        <aside class="checkout-summary">
+            <h3>Resumo do pedido</h3>
+            <ul>
+                {% for line in cart_lines %}
+                    <li>
+                        <span>{{ line.product.name }} x{{ line.quantity }}</span>
+                        <strong>{{ line.line_total_cents | brl }}</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+            <div class="checkout-totals">
+                <p><span>Subtotal:</span> <strong>{{ subtotal_cents | brl }}</strong></p>
+                <p><span>Cupom {{ auto_coupon_code }}:</span> <strong>-{{ discount_cents | brl }}</strong></p>
+                <p class="checkout-final-total"><span>Total:</span> <strong>{{ total_cents | brl }}</strong></p>
+            </div>
+            <p class="coupon-note">Cupom de 100% aplicado automaticamente para impedir cobranca.</p>
+        </aside>
+    </div>
+</section>
+{% endblock %}

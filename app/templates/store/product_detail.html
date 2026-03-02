@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | {{ product.name }}{% endblock %}
+
+{% block content %}
+<section class="product-detail-page">
+    <article class="product-detail-main">
+        <div class="product-detail-image">
+            <img src="{{ url_for('static', filename='img/' ~ product.image_filename) }}" alt="{{ product.name }}">
+        </div>
+        <div class="product-detail-info">
+            <h1>{{ product.name }}</h1>
+            <p class="product-detail-price">{{ product.price_cents | brl }} <span>ou 2x de {{ (product.price_cents // 2) | brl }}</span></p>
+            <p class="product-detail-description">{{ product.description_long }}</p>
+
+            <div class="product-detail-cta-box">
+                <p class="product-detail-cta-note">Selecione quantidade e adicione ao carrinho.</p>
+                <form class="add-to-cart-form" action="{{ url_for('store.add_cart_item') }}" method="post">
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <label for="quantity">Quantidade</label>
+                    <input id="quantity" name="quantity" type="number" min="1" max="99" value="1">
+                    <button class="buy-button" type="submit">Adicionar ao carrinho</button>
+                </form>
+            </div>
+        </div>
+    </article>
+
+    {% if related_products %}
+        <section class="related-products">
+            <div class="title-container">
+                <h1 class="h1-title">Relacionados</h1>
+                <h2 class="h2-subtitle">Produtos</h2>
+            </div>
+            <div class="products-grid">
+                {% for related in related_products %}
+                    <article class="product-card">
+                        <a href="{{ url_for('store.product_detail_page', slug=related.slug) }}">
+                            <img src="{{ url_for('static', filename='img/' ~ related.image_filename) }}" alt="{{ related.name }}" class="product-image">
+                        </a>
+                        <div class="product-info">
+                            <h3 class="product-title">
+                                <a href="{{ url_for('store.product_detail_page', slug=related.slug) }}" class="product-link">{{ related.name }}</a>
+                            </h3>
+                            <p class="product-description">{{ related.description_short }}</p>
+                            <div class="product-footer">
+                                <div class="price-box">
+                                    <span class="price-value">{{ related.price_cents | brl }}</span>
+                                    <span class="price-installments">ou em 2x de {{ (related.price_cents // 2) | brl }}</span>
+                                </div>
+                                <form action="{{ url_for('store.add_cart_item') }}" method="post">
+                                    <input type="hidden" name="product_id" value="{{ related.id }}">
+                                    <input type="hidden" name="quantity" value="1">
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+                                    <button class="buy-button" type="submit">Comprar</button>
+                                </form>
+                            </div>
+                        </div>
+                    </article>
+                {% endfor %}
+            </div>
+        </section>
+    {% endif %}
+</section>
+{% endblock %}

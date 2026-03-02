@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Confirmacao{% endblock %}
+
+{% block content %}
+<section class="success-page">
+    <div class="success-card">
+        <h1>Pedido concluido</h1>
+        <p>Fluxo finalizado com cupom 100% e sem cobranca.</p>
+        <p><strong>Protocolo:</strong> #{{ occurrence.id }}</p>
+        <p><strong>Status inicial:</strong> {{ occurrence.status }}</p>
+        <p><strong>Categoria mapeada:</strong> {{ occurrence.mapped_category }}</p>
+        <p><strong>Urgencia:</strong> {{ occurrence.urgency_level }}</p>
+        <div class="success-actions">
+            <a class="buy-button" href="{{ url_for('store.products_page') }}">Voltar para produtos</a>
+            <a class="buy-button" href="{{ url_for('user.orders_page') }}">Acompanhar pedido</a>
+            <a class="buy-button secondary-btn" href="{{ url_for('store.home_page') }}">Ir para home</a>
+        </div>
+    </div>
+</section>
+{% endblock %}

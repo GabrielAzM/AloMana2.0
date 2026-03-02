@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Pedido #{{ order.id }}{% endblock %}
+
+{% block content %}
+<section class="order-detail-page">
+    <div class="orders-header">
+        <h1>Pedido #{{ order.id }}</h1>
+        <p>Status atual: <strong>{{ order.status }}</strong></p>
+    </div>
+
+    <div class="order-detail-grid">
+        <article class="order-card">
+            <h2>Resumo</h2>
+            <p><strong>Data:</strong> {{ order.created_at | datetime_br }}</p>
+            <p><strong>Categoria:</strong> {{ order.mapped_category }}</p>
+            <p><strong>Urgencia:</strong> {{ order.urgency_level }}</p>
+            <p><strong>Observacao:</strong> {{ order.observation or "-" }}</p>
+            <p><strong>Contato:</strong> {{ order.contact_phone or "-" }} | {{ order.contact_email or "-" }}</p>
+            <p><strong>Total:</strong> {{ order.total_cents | brl }}</p>
+        </article>
+
+        <article class="order-card">
+            <h2>Itens registrados</h2>
+            {% set items = order.get_items() %}
+            {% if items %}
+                <ul class="order-list">
+                    {% for item in items %}
+                        <li>
+                            <strong>{{ item.product_name }}</strong>
+                            <span>Qtd: {{ item.quantity }} | {{ item.line_total_cents | brl }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>Nenhum item encontrado.</p>
+            {% endif %}
+        </article>
+    </div>
+
+    <article class="order-card">
+        <h2>Historico de status</h2>
+        {% if order.histories %}
+            <ul class="order-list">
+                {% for event in order.histories %}
+                    <li>
+                        <strong>{{ event.new_status }}</strong>
+                        <span>
+                            {% if event.previous_status %}de {{ event.previous_status }}{% else %}status inicial{% endif %}
+                            em {{ event.changed_at | datetime_br }}
+                        </span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Sem historico registrado.</p>
+        {% endif %}
+    </article>
+
+    <article class="order-card">
+        <h2>Mensagens para a equipe</h2>
+        <form class="user-message-form" action="{{ url_for('user.order_add_message', occurrence_id=order.id) }}" method="post">
+            <textarea name="message_text" rows="4" maxlength="2000" placeholder="Escreva uma atualizacao para a equipe de triagem..." required></textarea>
+            <button class="buy-button" type="submit">Enviar mensagem</button>
+        </form>
+
+        {% if order.user_messages %}
+            <ul class="order-list">
+                {% for message in order.user_messages %}
+                    <li>
+                        <p>{{ message.message_text }}</p>
+                        <span>{{ message.created_at | datetime_br }} - {{ message.user.username }}</span>
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>Nenhuma mensagem enviada ate o momento.</p>
+        {% endif %}
+    </article>
+
+    <a class="buy-button secondary-btn" href="{{ url_for('user.orders_page') }}">Voltar para meus pedidos</a>
+</section>
+{% endblock %}

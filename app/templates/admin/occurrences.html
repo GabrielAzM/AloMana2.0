@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Admin Ocorrencias{% endblock %}
+
+{% block content %}
+<section class="admin-page">
+    <div class="admin-header">
+        <div>
+            <h1>Ocorrencias registradas</h1>
+            <p>Usuario ativo: {{ admin_user.username }}</p>
+        </div>
+        <div class="admin-header-actions">
+            <a class="buy-button secondary-btn" href="{{ url_for('admin.mappings_page') }}">Mapeamentos</a>
+            <form action="{{ url_for('admin.logout') }}" method="post">
+                <button class="buy-button" type="submit">Sair</button>
+            </form>
+        </div>
+    </div>
+
+    <form class="admin-filter-form" method="get" action="{{ url_for('admin.occurrences_page') }}">
+        <input type="text" name="q" value="{{ search_term }}" placeholder="Buscar por protocolo, categoria ou contato">
+        <select name="status">
+            <option value="">Todos os status</option>
+            {% for status in statuses %}
+                <option value="{{ status }}" {% if status_filter == status %}selected{% endif %}>{{ status }}</option>
+            {% endfor %}
+        </select>
+        <button class="buy-button" type="submit">Filtrar</button>
+    </form>
+
+    {% if occurrences %}
+        <div class="admin-table-wrapper">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>Protocolo</th>
+                        <th>Data</th>
+                        <th>Categoria</th>
+                        <th>Urgencia</th>
+                        <th>Status</th>
+                        <th>Usuario</th>
+                        <th>Total</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for occurrence in occurrences %}
+                        <tr>
+                            <td>#{{ occurrence.id }}</td>
+                            <td>{{ occurrence.created_at | datetime_br }}</td>
+                            <td>{{ occurrence.mapped_category }}</td>
+                            <td>{{ occurrence.urgency_level }}</td>
+                            <td>{{ occurrence.status }}</td>
+                            <td>
+                                {% if occurrence.user %}
+                                    {{ occurrence.user.username }}<br>
+                                    <small>{{ occurrence.user.email }}</small>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>{{ occurrence.total_cents | brl }}</td>
+                            <td>
+                                <a class="table-link" href="{{ url_for('admin.occurrence_detail_page', occurrence_id=occurrence.id) }}">Abrir</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="empty-state">Nenhuma ocorrencia encontrada para os filtros atuais.</p>
+    {% endif %}
+</section>
+{% endblock %}

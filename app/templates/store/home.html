@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Home{% endblock %}
+
+{% block content %}
+<section id="banner-container">
+    <img src="{{ url_for('static', filename='img/banner-homepage.jpg') }}" alt="Banner principal da loja Alo!Mana?">
+</section>
+
+<section class="categorias-container">
+    <div class="title-container">
+        <h1 class="h1-title">Categorias</h1>
+        <h2 class="h2-subtitle">Nossas</h2>
+    </div>
+    <div class="categories-grid">
+        <a class="category-link" href="{{ url_for('store.category_page', slug='maquiagem') }}">
+            <div class="category-card card-labios">
+                <p class="category-label">LABIOS</p>
+            </div>
+        </a>
+        <a class="category-link" href="{{ url_for('store.category_page', slug='skincare') }}">
+            <div class="category-card card-skincare">
+                <p class="category-label">SKINCARE</p>
+            </div>
+        </a>
+        <a class="category-link" href="{{ url_for('store.category_page', slug='maquiagem') }}">
+            <div class="category-card card-face">
+                <p class="category-label">FACE</p>
+            </div>
+        </a>
+        <a class="category-link" href="{{ url_for('store.category_page', slug='kits') }}">
+            <div class="category-card card-acessorios">
+                <p class="category-label">ACESSORIOS</p>
+            </div>
+        </a>
+        <a class="category-link" href="{{ url_for('store.category_page', slug='maquiagem') }}">
+            <div class="category-card card-olhos">
+                <p class="category-label">OLHOS</p>
+            </div>
+        </a>
+    </div>
+</section>
+
+<section class="favorite-container">
+    <div class="title-container">
+        <h1 class="h1-title">Clientes</h1>
+        <h2 class="h2-subtitle">Favoritos dos</h2>
+    </div>
+
+    <div class="products-grid">
+        {% for product in featured_products %}
+            <article class="product-card">
+                <a href="{{ url_for('store.product_detail_page', slug=product.slug) }}">
+                    <img src="{{ url_for('static', filename='img/' ~ product.image_filename) }}" alt="{{ product.name }}" class="product-image">
+                </a>
+                <div class="product-info">
+                    <h3 class="product-title">{{ product.name }}</h3>
+                    <p class="product-description">{{ product.description_short }}</p>
+                    <div class="product-footer">
+                        <div class="price-box">
+                            <span class="price-value">{{ product.price_cents | brl }}</span>
+                            <span class="price-installments">ou em 2x de {{ (product.price_cents // 2) | brl }}</span>
+                        </div>
+                        <form action="{{ url_for('store.add_cart_item') }}" method="post">
+                            <input type="hidden" name="product_id" value="{{ product.id }}">
+                            <input type="hidden" name="quantity" value="1">
+                            <input type="hidden" name="next" value="{{ request.path }}">
+                            <button class="buy-button" type="submit">Comprar</button>
+                        </form>
+                    </div>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+<section class="depoimentos-container">
+    <div class="title-container">
+        <h1 class="h1-title">Depoimentos</h1>
+    </div>
+    <div class="depoimentos-grid static-depoimentos-grid">
+        {% for testimonial in testimonials %}
+            <article class="testemunho-card">
+                <div class="quote-area">
+                    <span class="aspas">"</span>
+                    <p class="texto-depoimento">{{ testimonial.text }}</p>
+                </div>
+                <div class="cliente-info">
+                    <img src="{{ url_for('static', filename='img/' ~ testimonial.photo) }}" alt="Foto de {{ testimonial.name }}" class="foto-perfil">
+                    <h3 class="nome-cliente">{{ testimonial.name }}</h3>
+                </div>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

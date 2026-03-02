@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Alo!Mana? | Institucional{% endblock %}
+
+{% block content %}
+<section id="banner-container">
+    <img src="{{ url_for('static', filename='img/banner-sobre.jpg') }}" alt="Banner institucional Alo!Mana?">
+</section>
+
+<section class="institutional-content">
+    <article class="institutional-intro">
+        <p>
+            A Alo!Mana? nasceu da ideia de transformar fluxos familiares de e-commerce em uma
+            experiencia discreta de apoio. O prototipo prioriza navegacao simples, linguagem de
+            duplo sentido e reducao de exposicao para mulheres em situacao de risco.
+        </p>
+        <p>
+            Nossa proposta combina fachada de loja de maquiagem com registro funcional de ocorrencias
+            no backend, triagem administrativa e encaminhamento por status.
+        </p>
+    </article>
+
+    <section class="institutional-pillars">
+        <div class="title-container">
+            <h1 class="h1-title">Pilares</h1>
+            <h2 class="h2-subtitle">Nossos</h2>
+        </div>
+        <div class="pillars-grid">
+            <article>
+                <h3>1. Protecao ativa</h3>
+                <p>Interface plausivel para reduzir sinais explicitos durante o uso.</p>
+            </article>
+            <article>
+                <h3>2. Minimizacao de dados</h3>
+                <p>Coleta apenas do necessario para triagem e encaminhamento inicial.</p>
+            </article>
+            <article>
+                <h3>3. Fluxo funcional</h3>
+                <p>Registro no backend com painel administrativo para gestao da ocorrencia.</p>
+            </article>
+        </div>
+    </section>
+</section>
+{% endblock %}

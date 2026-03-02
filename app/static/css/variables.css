@@ -1,0 +1,39 @@
+/***** VARIAÇÕES DE CORES & TIPOGRAFIA *****/
+:root {
+    /* ---PALETA DE CORES--- */
+    --color-primary: #7A1E3A;       /* Vinho (Destaque principal) */
+    --color-secondary: #E6B7C1;     /* Rosa Suave (Apoio) */
+    --color-accent: #E4DABF;        /* Creme (Fundo do site) */
+
+    /* Cores de Interface e Apoio */
+    --color-details: #49454F;                        /* Cinza Arroxeado (Barra de busca, Ícones e Carrinho) */
+    --color-dark-surface: #1D1D1D;                   /* Preto Suave (Rodapés/Cards) */
+    --color-neutral-gray: #D8D8D8;                   /* Cinza Intermediário (Nome dos clientes - card de depoimentos) */
+    --color-nav-bg: #E8E8E8;                         /* Cinza Claro (Fundo das setas) */
+    --color-nav-arrow: #000000;                      /* Preto Puro (Setas) */
+    --color-border-subtle: rgba(67, 67, 67, 0.1);    /* Linha divisória fina */
+    --color-black: #1A1A1A;                          /* Preto Suave */
+    --color-white: #FFFFFF;                          /* Branco Puro */
+
+    /* ---TIPOGRAFIA--- */
+    --ff-primary: 'Montserrat', sans-serif;    /* Titulos */
+    --ff-secondary: 'Lato', sans-serif;        /* Texto */
+
+    /* --- PESOS DE FONTE (FONT WEIGHTS) --- */
+    --fw-light: 300;
+    --fw-regular: 400;
+    --fw-medium: 500;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-extrabold: 800;
+
+    /* --- ESCALA DE TAMANHOS (FONT SIZES) --- */
+    --fs-display: 3rem;              /* 48px - Aspas de depoimento */
+    --fs-product-detail: 2.75rem;    /* 44px - Nome do produto (página interna) */
+    --fs-section-main: 2.25rem;      /* 36px - Títulos principais (h1) */
+    --fs-section-support: 1.75rem;   /* 28px - Subtítulos (h2) */
+    --fs-card-title: 1.375rem;       /* 22px - Título dos Cards de produto (h3) */
+    --fs-body: 1.125rem;             /* 18px - Texto corrido geral */
+    --fs-description: 0.875rem;      /* 14px - Descrições internas/Texto dos depoimentos */
+    --fs-small: 0.75rem;             /* 12px - Parcelamento e infos secundárias */
+}
